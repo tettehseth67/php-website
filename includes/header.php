@@ -19,7 +19,7 @@
 <body>
     <?php
     $page = basename($_SERVER['PHP_SELF']);
-    if ($page == "register.php" || $page == "login.php") {
+    if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php") {
     ?>
         <nav class="navbar navbar-light bg-light" aria-label="Light navigation">
             <div class="container">

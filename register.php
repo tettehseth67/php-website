@@ -1,6 +1,7 @@
 <?php
 $title = 'Registration';
 require_once 'includes/header.php';
+require_once 'db/db_conn.php';
 
 ?>
 
