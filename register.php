@@ -3,6 +3,8 @@ $title = 'Registration';
 require_once 'includes/header.php';
 require_once 'db/db_conn.php';
 
+$results = $crud->getSpecialties();
+
 ?>
 
 <div class="container px-3 py-3">
@@ -28,11 +30,11 @@ require_once 'db/db_conn.php';
                 <div class="mb-3">
                     <label for="specialty" class="form-label">Area of Expertise:</label>
                     <select class="form-select" aria-label="Default select example" name="specialty" id="specialty">
-                        <option value="">Select an option</option>
-                        <option value="1">Database Admin</option>
-                        <option value="2">Software Developer</option>
-                        <option value="3">Web Developer</option>
-                        <option value="4">Other</option>
+                        <?php foreach($results as $specialty) { ?>
+                            <option value="<?php echo $specialty['specialty_id'];?>">
+                                <?php echo $specialty['name'];?>
+                            </option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -51,9 +53,11 @@ require_once 'db/db_conn.php';
                         You already have an account? <a href="login.php">Login</a>
                     </p>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Register</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<?php require_once 'includes/footer.php'; ?>

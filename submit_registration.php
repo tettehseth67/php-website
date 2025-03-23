@@ -7,12 +7,12 @@ require_once 'db/db_conn.php';
     if (isset($_POST['submit'])) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
-        $email = $_POST['email'];
         $dob = $_POST['dob'];
+        $email = $_POST['email'];
         $phone = $_POST['phone'];
         $specialty = $_POST['specialty'];
-        
-        $isSuccess = $crud->insert($fname, $lname, $email, $dob, $phone, $specialty);
+
+        $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $phone, $specialty);
         if ($isSuccess) {
             echo '<script>window.location.href = "index.php";</script>';
         } else {

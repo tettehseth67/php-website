@@ -9,7 +9,7 @@ require_once 'includes/header.php';
         <div class="col-md-6 offset-md-3">
             <h1 class="text-center m-3">Login</h1>
 
-            <form action="submit_registration.php" method="POST">
+            <form action="" method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -32,3 +32,5 @@ require_once 'includes/header.php';
         </div>
     </div>
 </div>
+
+<?php require_once 'includes/footer.php'; ?>

@@ -9,7 +9,7 @@ class Crud {
         $this->db = $conn;
     }
 
-    public function insert($fname, $lname, $dob, $email, $phone, $specialty)
+    public function insertAttendees($fname, $lname, $dob, $email, $phone, $specialty)
     {
         try {
             $sql = "INSERT INTO attendees(fname, lname, dob, email, phone, specialty_id) VALUES (:fname, :lname, :dob, :email, :phone, :specialty)";
@@ -27,11 +27,18 @@ class Crud {
             return false;
         }
     }
-    public function read()
+
+    public function getAttendees()
     {
-        $sql = "SELECT * FROM attendees";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt;
+        $sql = "SELECT * FROM attendees a inner join specialties s on a.specialty_id = s.specialty_id";
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
+    }
+
+    public function getSpecialties()
+    {
+        $sql = "SELECT * FROM specialties";
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
     }
 }
