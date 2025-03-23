@@ -19,11 +19,11 @@
 <body>
     <?php
     $page = basename($_SERVER['PHP_SELF']);
-    if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php" || $page == "forgot_password.php") {
+    if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php" || $page == "forgot_password.php" || $page == "login_success.php") {
     ?>
         <nav class="navbar navbar-light bg-light" aria-label="Light navigation">
             <div class="container">
-                <a class="navbar-brand" href="index.php">MySite</a>
+                <a class="navbar-brand" href="index.php">IT Company</a>
             </div>
         </nav>
     <?php } else { ?>

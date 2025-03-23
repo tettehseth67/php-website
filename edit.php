@@ -10,9 +10,9 @@ $results = $crud->getSpecialties();
 <div class="container px-3 py-3">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1 class="text-center m-3">Registration for IT Conference</h1>
+            <h1 class="text-center m-3">Edit Records</h1>
 
-            <form action="submit_registration.php" method="post">
+            <form action="" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="fname" class="form-label">First name:</label>
@@ -48,13 +48,8 @@ $results = $crud->getSpecialties();
                         Please enter a valid phone number in the format XXX-XXX-XXXX.
                     </small>
                 </div>
-                <div class="mb-3">
-                    <p>
-                        You already have an account? <a href="login.php">Login</a>
-                    </p>
-                </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="submit">Register</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Edit Records</button>
                 </div>
             </form>
         </div>
