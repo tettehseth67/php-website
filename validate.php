@@ -26,3 +26,6 @@ require_once 'db/db_conn.php';
             </div>';
         }
     }
+
+require_once 'includes/footer.php';
+?>

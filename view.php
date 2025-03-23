@@ -4,13 +4,13 @@ require_once 'includes/header.php';
 require_once 'db/db_conn.php';
 
 // get all records by id
-if (isset($_GET['$id'])) {
-    $id = $_GET['$id'];
-    $attendee = $crud->getAttendeesById($id);
-} else {
+if (!isset($_GET['$id'])) {
     echo '<div class="alert alert-danger" role="alert">No record found!</div>';
     exit();
-}
+} else {
+    $id = $_GET['$id'];
+    $attendee = $crud->getAttendeesById($id);
+
 ?>
 
 <!-- Main Content -->
@@ -20,16 +20,18 @@ if (isset($_GET['$id'])) {
             <?php echo $attendee['fname'] . " " . $attendee['lname']; ?>
         </h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">
-            <?php echo $attendee['email']; ?>
+            <?php echo $attendee['name']; ?>
         </h6>
         <p class="card-text">
             <?php echo $attendee['dob']; ?>
         </p>
         <p class="card-text">
-            <?php echo $attendee['specialty_id']; ?>
+            <?php echo $attendee['email']; ?>
         </p>
     </div>
 </div>
+
+<?php } ?>
 
 <?php
 require 'includes/footer.php';

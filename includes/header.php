@@ -40,7 +40,7 @@
                                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="attendees.php">Attendees</a>
+                                <a class="nav-link" href="attendees.php">View Attendees</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">

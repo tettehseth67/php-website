@@ -44,14 +44,14 @@ class Crud {
 
     public function getAttendeesById($id)
     {
-        $sql = "SELECT * FROM attendees WHERE attendee_id = :id";
+        $sql = "SELECT * FROM attendees a inner join specialties s on a.specialty_id = s.specialty_id WHERE attendee_id = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateAttendees($id, $fname, $lname, $dob, $email, $phone, $specialty)
+    public function editAttendees($id, $fname, $lname, $dob, $email, $phone, $specialty)
     {
         try {
             $sql = "UPDATE attendees SET fname = :fname, lname = :lname, dob = :dob, email = :email, phone = :phone, specialty_id = :specialty WHERE attendee_id = :id";
@@ -63,6 +63,20 @@ class Crud {
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':phone', $phone);
             $stmt->bindParam(':specialty', $specialty);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: ". $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteAttendees($id)
+    {
+        try {
+            $sql = "DELETE FROM attendees WHERE attendee_id = :id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {

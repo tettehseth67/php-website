@@ -37,7 +37,7 @@ $results = $crud->getAttendees();
                     <td>
                         <a href="view.php?$id=<?php echo $value['attendee_id']?>" class="btn btn-success">View</a>
                         <a href="edit.php?id=<?php echo $value['attendee_id'] ?>" class="btn btn-primary">Edit</a>
-                        <a href="delete.php?id=<?php echo $value['attendee_id']?>" class="btn btn-danger">Delete</a>
+                        <a onclick="return confirm('Are you sure you really want to delete this attendee record');" href="delete.php?id=<?php echo $value['attendee_id']?>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             <?php }?>
