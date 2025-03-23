@@ -19,7 +19,7 @@ $results = $crud->getAttendees();
                 <th scope="col">Date of Birth</th>
                 <th scope="col">Email Address</th>
                 <th scope="col">Phone Number</th>
-                <th scope="col">Specialty</th>
+                <th scope="col">Course</th>
                 <th scope="col">Actions</th>
 
             </tr>
@@ -30,9 +30,9 @@ $results = $crud->getAttendees();
                     <th scope="row"><?php echo $key + 1;?></th>
                     <td><?php echo $value['fname'];?></td>
                     <td><?php echo $value['lname'];?></td>
-                    <td><?php echo $value['dob'];?></td>
-                    <td><?php echo $value['email'];?></td>
-                    <td><?php echo $value['phone'];?></td>
+                    <td><?php echo $value['dateofbirth'];?></td>
+                    <td><?php echo $value['emailaddress'];?></td>
+                    <td><?php echo $value['phonenumber'];?></td>
                     <td><?php echo $value['name'];?></td>
                     <!-- <td>
                         <a href="view.php?$id=<?php echo $value['student_id']?>" class="btn btn-success">View</a>
