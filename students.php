@@ -1,5 +1,5 @@
 <?php
-$title = 'Attendees';
+$title = 'Students';
 require_once 'includes/header.php';
 require_once 'db/db_conn.php';
 
@@ -9,7 +9,7 @@ $results = $crud->getAttendees();
 
 <!-- Main content -->
 <div class="container">
-    <h1 class="text-center py-3">Attendees</h1>
+    <h1 class="text-center py-3">Students</h1>
     <table class="table table-striped text-center">
         <thead>
             <tr>
@@ -34,11 +34,11 @@ $results = $crud->getAttendees();
                     <td><?php echo $value['email'];?></td>
                     <td><?php echo $value['phone'];?></td>
                     <td><?php echo $value['name'];?></td>
-                    <td>
-                        <a href="view.php?$id=<?php echo $value['attendee_id']?>" class="btn btn-success">View</a>
-                        <a href="edit.php?id=<?php echo $value['attendee_id'] ?>" class="btn btn-primary">Edit</a>
-                        <a onclick="return confirm('Are you sure you really want to delete this attendee record');" href="delete.php?id=<?php echo $value['attendee_id']?>" class="btn btn-danger">Delete</a>
-                    </td>
+                    <!-- <td>
+                        <a href="view.php?$id=<?php echo $value['student_id']?>" class="btn btn-success">View</a>
+                        <a href="edit.php?id=<?php echo $value['student_id'] ?>" class="btn btn-primary">Edit</a>
+                        <a onclick="return confirm('Are you sure you really want to delete this attendee record');" href="delete.php?id=<?php echo $value['student_id']?>" class="btn btn-danger">Delete</a>
+                    </td> -->
                 </tr>
             <?php }?>
         </tbody>

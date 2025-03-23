@@ -8,6 +8,7 @@ $results = $crud->getSpecialties();
 // Get the selected record
 if (!isset($_GET['id'])) {
     echo '<div class="alert alert-danger" role="alert">No record found!</div>';
+    header("Location: attendees.php");
     exit();
 } else {
     $id = $_GET['id'];

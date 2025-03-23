@@ -42,6 +42,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="attendees.php">View Attendees</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="students.php">Students</a>
+                            </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
