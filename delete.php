@@ -8,7 +8,7 @@ if(!isset($_GET['id'])) {
 } else {
     $id = $_GET['id'];
     // Call the delete function from Crud class
-    $isDeleted = $crud->getAttendeesById($id);
+    $isDeleted = $crud->deleteAttendees($id);
     if($isDeleted) {
         header("Location: attendees.php");
     } else {

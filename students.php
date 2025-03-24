@@ -10,6 +10,9 @@ $results = $crud->getAttendees();
 <!-- Main content -->
 <div class="container">
     <h1 class="text-center py-3">Students</h1>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <a href="add.php" class="btn btn-primary">Add New Student</a>
+    </div>
     <table class="table table-striped text-center">
         <thead>
             <tr>

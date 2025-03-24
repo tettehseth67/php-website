@@ -5,14 +5,50 @@ require_once 'db/db_conn.php';
 
 $results = $crud->getSpecialties();
 
+$fname_error = null;
+$lname_error = null;
+$dob_error = null;
+$email_error = '';
+$phone_error = '';
+
+$specialties = array();
+
+if (isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $dob = $_POST['dob'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $specialty = $_POST['specialty'];
+
+    if (empty($fname)) {
+        echo $fname_error = '<div class="alert alert-danger" role="alert">First name is required.</div>';
+    }
+    if (empty($lname)) {
+        echo $lname_error = '<div class="alert alert-danger" role="alert">Last name is required.</div>';
+    }
+    if (empty($dob)) {
+        echo '<div class="alert alert-danger" role="alert">Date of Birth is required.</div>';
+    }
+    if (empty($email)) {
+        echo '<div class="alert alert-danger" role="alert">Email is required.</div>';
+    }
+    if (empty($phone)) {
+        echo '<div class="alert alert-danger" role="alert">Phone number is required.</div>';
+    }
+    if (empty($specialty)) {
+        echo '<div class="alert alert-danger" role="alert">Specialty is required.</div>';
+    }
+}
+
 ?>
 
 <div class="container px-3 py-3">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1 class="text-center m-3">Registration for IT Conference</h1>
+            <h1 class="text-center m-3">Attendee Details</h1>
 
-            <form action="registered.php" method="post">
+            <form action="submit_registration.php" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="fname" class="form-label">First name:</label>
@@ -30,9 +66,9 @@ $results = $crud->getSpecialties();
                 <div class="mb-3">
                     <label for="specialty" class="form-label">Area of Expertise:</label>
                     <select class="form-select" aria-label="Default select example" name="specialty" id="specialty">
-                        <?php foreach($results as $specialty) { ?>
-                            <option value="<?php echo $specialty['specialty_id'];?>">
-                                <?php echo $specialty['name'];?>
+                        <?php foreach ($results as $specialty) { ?>
+                            <option value="<?php echo $specialty['specialty_id']; ?>">
+                                <?php echo $specialty['name']; ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -54,11 +90,12 @@ $results = $crud->getSpecialties();
                     </p>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary" name="submit">Register</button>
+                    <button type="submit" class="btn btn-primary" name="submit">Create Attendees</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <?php require_once 'includes/footer.php'; ?>

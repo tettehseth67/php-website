@@ -1,7 +1,7 @@
 <?php
 $title = 'Login';
-require_once '/includes/header.php';
-require_once '/db/db_conn.php';
+require_once 'includes/header.php';
+require_once 'db/db_conn.php';
 
 ?>
 
@@ -34,4 +34,4 @@ require_once '/db/db_conn.php';
     </div>
 </div>
 
-<?php require_once '/includes/footer.php'; ?>
+<?php require_once 'includes/footer.php'; ?>

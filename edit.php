@@ -27,16 +27,16 @@ if (!isset($_GET['id'])) {
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="fname" class="form-label">First name:</label>
-                        <input type="text" class="form-control" id="fname" name="fname" aria-label="First name" value="<?php echo $attendee['fname']; ?>">
+                        <input type="text" class="form-control" id="fname" name="fname" aria-label="First name" value="<?php echo $attendee['fname']; ?>" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lname" class="form-label">Last name:</label>
-                        <input type="text" class="form-control" id="lname" name="lname" aria-label="Last name" value="<?php echo $attendee['lname']; ?>">
+                        <input type="text" class="form-control" id="lname" name="lname" aria-label="Last name" value="<?php echo $attendee['lname']; ?>" required>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth:</label>
-                    <input type="text" class="form-control" id="dob" name="dob" value="<?php echo $attendee['dob']; ?>">
+                    <input type="text" class="form-control" id="dob" name="dob" value="<?php echo $attendee['dob']; ?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="specialty" class="form-label">Area of Expertise:</label>
@@ -50,7 +50,7 @@ if (!isset($_GET['id'])) {
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $attendee['email']; ?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $attendee['email']; ?>" required>
                     <div id="emailHelp" class="form-text text-muted text-light">We'll never share your email with anyone else.</div>
                 </div>
                 <div class="mb-3">
@@ -60,8 +60,9 @@ if (!isset($_GET['id'])) {
                         Please enter a valid phone number in the format XXX-XXX-XXXX.
                     </small>
                 </div>
-                <div class="d-grid">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <button type="submit" class="btn btn-success" name="submit">Edit Records</button>
+                    <a href="attendees.php" class="mt-2">Cancel</a>
                 </div>
             </form>
         </div>
