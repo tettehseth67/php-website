@@ -1,3 +1,8 @@
+<?php
+$title = 'Attendees';
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.72.0">
-    <title>Dashboard Template · Bootstrap</title>
+    <title><?php echo $title ?> - Dashboard</title>
 
     <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
 
