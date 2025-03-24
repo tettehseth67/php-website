@@ -24,28 +24,21 @@ $results = $crud->getSpecialties();
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth:</label>
-                    <input type="text" class="form-control" id="dob" name="dob" required>
-                </div>
-                <div class="mb-3">
-                    <label for="specialty" class="form-label">Area of Expertise:</label>
-                    <select class="form-select" aria-label="Default select example" name="specialty" id="specialty">
-                        <?php foreach($results as $specialty) { ?>
-                            <option value="<?php echo $specialty['specialty_id'];?>">
-                                <?php echo $specialty['name'];?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="mb-3">
                     <label for="email" class="form-label">Email address:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number:</label>
-                    <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phoneHelp" required>
-                    <small id="phoneHelp" class="form-text text-muted text-light">
-                        Please enter a valid phone number in the format XXX-XXX-XXXX.
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" required>
+                    <small id="passwordHelp" class="form-text text-muted text-light">
+                        Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="pswd-repeat" class="form-label">Repeat Password:</label>
+                    <input type="password" class="form-control" id="pswd-repeat" name="pswd-repeat" aria-describedby="pswdRepeatHelp" required>
+                    <small id="pswdRepeatHelp" class="form-text text-muted text-light">
+                        Please repeat your password.
                     </small>
                 </div>
                 <div class="mb-3">

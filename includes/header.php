@@ -21,14 +21,14 @@
     $page = basename($_SERVER['PHP_SELF']);
     if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php" || $page == "forgot_password.php" || $page == "login_success.php") {
     ?>
-        <nav class="navbar navbar-light bg-light" aria-label="Light navigation">
+                    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
             <div class="container">
                 <a class="navbar-brand" href="index.php">IT Company</a>
             </div>
         </nav>
     <?php } else { ?>
         <header>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary" aria-label="Main navigation">
+            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
                 <div class="container">
                     <a class="navbar-brand" href="index.php">IT Company</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

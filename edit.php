@@ -61,8 +61,8 @@ if (!isset($_GET['id'])) {
                     </small>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="attendees.php" class="mt-2 btn btn-default">Back to list</a>
                     <button type="submit" class="btn btn-success" name="submit">Edit Records</button>
-                    <a href="attendees.php" class="mt-2">Cancel</a>
                 </div>
             </form>
         </div>

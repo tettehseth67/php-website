@@ -92,4 +92,18 @@ class Crud {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getAllUsers() {
+        $sql = "SELECT * FROM users";
+        $result = $this->db->query($sql);
+        return $result->fetchAll();
+    }
+
+      public function getUserById($userId) {
+        global $conn; // Use the global database connection
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bindParam("i", $userId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

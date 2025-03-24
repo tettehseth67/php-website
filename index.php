@@ -1,5 +1,7 @@
 <?php
 $title = 'Home Page';
+
+session_start();
 require_once 'includes/header.php';
 ?>
 
