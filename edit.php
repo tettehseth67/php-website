@@ -12,62 +12,62 @@ if (!isset($_GET['id'])) {
     exit();
 } else {
     $id = $_GET['id'];
-    $attendee = $crud->getAttendeesById($id);
+    $attendee = $crud->getAttendeeDetails($id);
 
 
 ?>
 
-<div class="container px-3 py-3">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1 class="text-center m-3">Edit Records</h1>
+    <div class="container px-3 py-3">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center m-3">Edit Records</h1>
 
-            <form action="editPost.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $attendee['attendee_id'];?>"/>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="fname" class="form-label">First name:</label>
-                        <input type="text" class="form-control" id="fname" name="fname" aria-label="First name" value="<?php echo $attendee['fname']; ?>" required>
+                <form action="editPost.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $attendee['attendee_id']; ?>" />
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fname" class="form-label">First name:</label>
+                            <input type="text" class="form-control" id="fname" name="fname" aria-label="First name" value="<?php echo $attendee['fname']; ?>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lname" class="form-label">Last name:</label>
+                            <input type="text" class="form-control" id="lname" name="lname" aria-label="Last name" value="<?php echo $attendee['lname']; ?>" required>
+                        </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lname" class="form-label">Last name:</label>
-                        <input type="text" class="form-control" id="lname" name="lname" aria-label="Last name" value="<?php echo $attendee['lname']; ?>" required>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth:</label>
+                        <input type="text" class="form-control" id="dob" name="dob" value="<?php echo $attendee['dob']; ?>" required>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth:</label>
-                    <input type="text" class="form-control" id="dob" name="dob" value="<?php echo $attendee['dob']; ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="specialty" class="form-label">Area of Expertise:</label>
-                    <select class="form-select" aria-label="Default select example" name="specialty" id="specialty">
-                        <?php foreach ($results as $specialty) { ?>
-                            <option value="<?php echo $specialty['specialty_id']; ?>" <?php if ($attendee['specialty_id'] == $specialty['specialty_id']) echo 'selected'; ?>>
-                                <?php echo $specialty['name']; ?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email address:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $attendee['email']; ?>" required>
-                    <div id="emailHelp" class="form-text text-muted text-light">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number:</label>
-                    <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phoneHelp">
-                    <small id="phoneHelp" class="form-text text-muted text-light">
-                        Please enter a valid phone number in the format XXX-XXX-XXXX.
-                    </small>
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <a href="attendees.php" class="mt-2 btn btn-default">Back to list</a>
-                    <button type="submit" class="btn btn-success" name="submit">Edit Records</button>
-                </div>
-            </form>
+                    <div class="mb-3">
+                        <label for="specialty" class="form-label">Area of Expertise:</label>
+                        <select class="form-select" aria-label="Default select example" name="specialty" id="specialty">
+                            <?php foreach ($results as $specialty) { ?>
+                                <option value="<?php echo $specialty['specialty_id'] ?>" <?php if ($specialty['specialty_id'] == $attendee['specialty_id']) echo 'selected' ?>>
+                                    <?php echo $specialty['name']; ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $attendee['email']; ?>" required>
+                        <div id="emailHelp" class="form-text text-muted text-light">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phoneHelp">
+                        <small id="phoneHelp" class="form-text text-muted text-light">
+                            Please enter a valid phone number in the format XXX-XXX-XXXX.
+                        </small>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                        <a href="attendees.php" class="mt-2 btn btn-default">Back to list</a>
+                        <button type="submit" class="btn btn-success" name="submit">Edit Records</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 <?php } ?>
 
 <?php require_once 'includes/footer.php'; ?>

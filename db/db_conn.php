@@ -13,7 +13,12 @@ try {
 }
 
 require_once 'crud.php';
+require_once 'user.php';
+require_once 'student.php';
 
 //define new instance of crud class
-
 $crud = new Crud($conn);
+$user = new User($conn);
+$student = new Student($conn);
+
+$user->insertUsers("admin", "password");

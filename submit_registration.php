@@ -10,11 +10,11 @@ require_once 'db/db_conn.php';
         $dob = $_POST['dob'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $specialty = $_POST['specialty'];
+        $specialty_id = $_POST['specialty'];
 
-        $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $phone, $specialty);
+        $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $phone, $specialty_id);
         if ($isSuccess) {
-            echo '<script>window.location.href = "index.php";</script>';
+            echo '<script>window.location.href = "attendees.php";</script>';
         } else {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> Failed to register. Please try again.
@@ -45,7 +45,7 @@ require_once 'db/db_conn.php';
                 <?php echo $_POST['dob'];?>
             </p>
             <p class="card-text">
-                <?php echo $_POST['specialty'];?>
+                <?php echo $_POST['specialty_name'];?>
             </p>
         </div>
     </div>

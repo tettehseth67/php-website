@@ -3,7 +3,7 @@ $title = 'Registration';
 require_once 'includes/header.php';
 require_once 'db/db_conn.php';
 
-$results = $course->getCourse();
+$results = $student->getCourse();
 
 ?>
 
@@ -30,9 +30,9 @@ $results = $course->getCourse();
                 <div class="mb-3">
                     <label for="course" class="form-label">Area of Expertise:</label>
                     <select class="form-select" aria-label="Default select example" name="course" id="course">
-                        <?php foreach($results as $course) { ?>
-                            <option value="<?php echo $course['course_id'];?>">
-                                <?php echo $course['name'];?>
+                        <?php foreach($results as $student) { ?>
+                            <option value="<?php echo $student['course_id'];?>">
+                                <?php echo $student['name'];?>
                             </option>
                         <?php } ?>
                     </select>

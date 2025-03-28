@@ -21,7 +21,7 @@
     $page = basename($_SERVER['PHP_SELF']);
     if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php" || $page == "forgot_password.php" || $page == "login_success.php") {
     ?>
-                    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
             <div class="container">
                 <a class="navbar-brand" href="index.php">IT Company</a>
             </div>
@@ -52,7 +52,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="login.php">Login</a>
-                            </li></div>
+                            </li>
                         </ul>
                     </div>
                 </div>

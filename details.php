@@ -5,42 +5,6 @@ require_once 'db/db_conn.php';
 
 $results = $crud->getSpecialties();
 
-$fname_error = null;
-$lname_error = null;
-$dob_error = null;
-$email_error = '';
-$phone_error = '';
-
-$specialties = array();
-
-if (isset($_POST['submit'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $dob = $_POST['dob'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $specialty = $_POST['specialty'];
-
-    if (empty($fname)) {
-        echo $fname_error = '<div class="alert alert-danger" role="alert">First name is required.</div>';
-    }
-    if (empty($lname)) {
-        echo $lname_error = '<div class="alert alert-danger" role="alert">Last name is required.</div>';
-    }
-    if (empty($dob)) {
-        echo '<div class="alert alert-danger" role="alert">Date of Birth is required.</div>';
-    }
-    if (empty($email)) {
-        echo '<div class="alert alert-danger" role="alert">Email is required.</div>';
-    }
-    if (empty($phone)) {
-        echo '<div class="alert alert-danger" role="alert">Phone number is required.</div>';
-    }
-    if (empty($specialty)) {
-        echo '<div class="alert alert-danger" role="alert">Specialty is required.</div>';
-    }
-}
-
 ?>
 
 <div class="container px-3 py-3">
@@ -83,11 +47,6 @@ if (isset($_POST['submit'])) {
                     <small id="phoneHelp" class="form-text text-muted text-light">
                         Please enter a valid phone number in the format XXX-XXX-XXXX.
                     </small>
-                </div>
-                <div class="mb-3">
-                    <p>
-                        You already have an account? <a href="login.php">Login</a>
-                    </p>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary" name="submit">Create Attendees</button>

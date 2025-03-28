@@ -7,12 +7,12 @@ require_once 'db/db_conn.php';
     if (isset($_POST['submit'])) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
-        $dob = $_POST['dob'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $specialty = $_POST['specialty'];
+        $dob = $_POST['dateofbirth'];
+        $email = $_POST['emailaddress'];
+        $phone = $_POST['phonenumber'];
+        $course_id = $_POST['course'];
 
-        $isSuccess = $student->insertStudents($fname, $lname, $dob, $email, $phone, $specialty);
+        $isSuccess = $student->insertStudents($fname, $lname, $dob, $email, $phone, $course_id);
         if ($isSuccess) {
             echo '<script>window.location.href = "index.php";</script>';
         } else {

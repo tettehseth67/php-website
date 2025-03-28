@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $specialty = $_POST['specialty'];
 
     //Call the update method from Crud class
-    $isUpdated = $crud->editAttendees($id, $fname, $lname, $dob, $email, $phone, $specialty);
+    $isUpdated = $crud->editAttendee($id, $fname, $lname, $dob, $email, $phone, $specialty);
     if ($isUpdated) {
         header("Location: attendees.php");
     } else {

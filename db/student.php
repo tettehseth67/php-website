@@ -11,7 +11,7 @@ class Student {
     public function insertStudents($fname, $lname, $dateofbirth, $emailaddress, $phonenumber, $course)
     {
         try {
-            $sql = "INSERT INTO students(fname, lname, dateofbirth, emailaddress, phonenumber, course) VALUES (:fname, :lname, :dateofbirth, :emailaddress, :phonenumber, :course)";
+            $sql = "INSERT INTO students(fname, lname, dateofbirth, emailaddress, phonenumber, course_id) VALUES (:fname, :lname, :dateofbirth, :emailaddress, :phonenumber, :course)";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':fname', $fname);
             $stmt->bindParam(':lname', $lname);

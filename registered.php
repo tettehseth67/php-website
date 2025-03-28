@@ -3,19 +3,15 @@ session_start();
 require_once 'db/db_conn.php';
 
 // Collect form data
-$fname = $_POST['fname'];
-$lname = $_POST['lname'];
-$email = $_POST['email'];
+$username = $_POST['username'];
 $password = $_POST['password'];
 
 // Assuming you've already initialized $conn (the PDO connection)
-$query = "INSERT INTO users (fname, lname, email, password) VALUES (?, ?, ?, ?)";
+$query = "INSERT INTO users (username, password) VALUES (?, ?)";
 $stmt = $conn->prepare($query);
 
 // Bind the parameters to the placeholders
-$stmt->bindParam(1, $fname);
-$stmt->bindParam(2, $lname);
-$stmt->bindParam(3, $email);
+$stmt->bindParam(3, $username);
 $stmt->bindParam(4, $password);
 
 // Execute the statement
