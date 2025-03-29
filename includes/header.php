@@ -73,4 +73,23 @@ include_once 'includes/session.php'; // Include session management file
         </header>
     <?php } ?>
 
-    <div class="container">
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-12">
+                <?php if (isset($_SESSION['message'])): ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php
+                        echo $_SESSION['message'];
+                        unset($_SESSION['message']);
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                        ?>
+                    </div>
+                <?php endif; ?>

@@ -45,7 +45,7 @@ require_once 'db/db_conn.php';
                 <?php echo $_POST['dob'];?>
             </p>
             <p class="card-text">
-                <?php echo $_POST['specialty_name'];?>
+                <?php echo $_POST['name'];?>
             </p>
         </div>
     </div>

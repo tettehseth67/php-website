@@ -1,67 +1,138 @@
 <?php
-$title = 'Login';
-require_once 'includes/header.php';
-require_once 'db/db_conn.php';
 
-// Check if the form has been submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = strtolower(trim($_POST['username']));
-        $password = $_POST['password'];
-        $new_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
-        // Check if remember me is checked
-        $rememberMe = isset($_POST['rememberMe']) ? true : false; // Check if remember me is checked
-        // Create a new User object
-        $user->getUsers($username, $password);
-        // Check if the user exists in the database
-        $result = $user->getUsers($username, $password);
-        if($result) {
-            // Set session variables
-            $_SESSION['user_id'] = $result['id'];
-            $_SESSION['username'] = $result['username'];
-            // Redirect to the home page
-            header('Location: index.php');
-            exit();
-        }else {
-            // If login fails, set an error message
-            echo "Invalid username or password.";
-            // Optionally, you can also log the failed attempt or take other actions
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: welcome.php");
+    exit;
+}
+
+// Include config file
+require_once "includes/header.php";
+require_once "db/db_conn.php";
+
+// Define variables and initialize with empty values
+$username = $password = "";
+$username_err = $password_err = $login_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Check if username is empty
+    if (empty(trim($_POST["username"]))) {
+        $username_err = "Please enter username.";
+    } else {
+        $username = trim($_POST["username"]);
+    }
+
+    // Check if password is empty
+    if (empty(trim($_POST["password"]))) {
+        $password_err = "Please enter your password.";
+    } else {
+        $password = trim($_POST["password"]);
+    }
+
+    // Validate credentials
+    if (empty($username_err) && empty($password_err)) {
+        // Prepare a select statement
+        $sql = "SELECT id, username, password FROM users WHERE username = :username";
+
+        if ($stmt = $conn->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                // Check if username exists, if yes then verify password
+                if ($stmt->rowCount() == 1) {
+                    if ($row = $stmt->fetch()) {
+                        $id = $row["id"];
+                        $username = $row["username"];
+                        $hashed_password = $row["password"];
+                        if (password_verify($password, $hashed_password)) {
+                            // Password is correct, so start a new session
+                            session_start();
+
+                            // Store data in session variables
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["id"] = $id;
+                            $_SESSION["username"] = $username;
+
+                            // Redirect user to welcome page
+                            header("location: index.php");
+                        } else {
+                            // Password is not valid, display a generic error message
+                            $login_err = "Invalid username or password.";
+                        }
+                    }
+                } else {
+                    // Username doesn't exist, display a generic error message
+                    $login_err = "Invalid username or password.";
+                }
+            } else {
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            unset($stmt);
         }
     }
 
+    // Close connection
+    unset($conn);
+}
 ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1 class="text-center m-3">Login</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-            <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="POST">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" aria-label="User name" required value="<?php 
-                        // Check if the form was submitted and populate the username field with the previous input if available
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['username'])) {
-                            echo htmlspecialchars($_POST['username']);
-                        }
-                        ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                </div>
-                <p class="text-start mt-3">Don't have an account? <a href="register.php">Register here</a></p>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font: 14px sans-serif;
+        }
 
-                <p class="text-start mt-3">Forgot Password? <a href="forgot_password.php">Reset Password</a></p>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
-            </form>
-        </div>
+        .wrapper {
+            width: 360px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+
+        <?php
+        if (!empty($login_err)) {
+            echo '<div class="alert alert-danger">' . $login_err . '</div>';
+        }
+        ?>
+
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
     </div>
-</div>
+</body>
 
-<?php require_once 'includes/footer.php'; ?>
+</html>

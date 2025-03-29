@@ -19,7 +19,7 @@ class User
             if ($result['num'] > 0) {
                 return "Username already exists.";
             }else {
-                $new_password = password_hash($password, PASSWORD_DEFAULT);
+                $new_password = password_hash($password, PASSWORD_BCRYPT); // Hash the password for security
                 $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(':username', $username);

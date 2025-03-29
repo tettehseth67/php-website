@@ -6,13 +6,16 @@ require_once 'db/db_conn.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+// Hash the password for security
+$new_password = password_hash($password, PASSWORD_BCRYPT);
+
 // Assuming you've already initialized $conn (the PDO connection)
 $query = "INSERT INTO users (username, password) VALUES (?, ?)";
 $stmt = $conn->prepare($query);
 
 // Bind the parameters to the placeholders
 $stmt->bindParam(1, $username);
-$stmt->bindParam(2, $password);
+$stmt->bindParam(2, $new_password);
 
 // Execute the statement
 $stmt->execute();
