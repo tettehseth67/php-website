@@ -11,8 +11,8 @@ $query = "INSERT INTO users (username, password) VALUES (?, ?)";
 $stmt = $conn->prepare($query);
 
 // Bind the parameters to the placeholders
-$stmt->bindParam(3, $username);
-$stmt->bindParam(4, $password);
+$stmt->bindParam(1, $username);
+$stmt->bindParam(2, $password);
 
 // Execute the statement
 $stmt->execute();
