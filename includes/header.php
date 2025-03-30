@@ -52,11 +52,13 @@ include_once 'includes/session.php'; // Include session management file
                         </ul>
                         <ul class="navbar-nav ms-auto">
                             <?php if (isset($_SESSION['username'])): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="profile.php">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="logout.php">Logout</a>
+                                <li class="nav-item dropdown">
+                                    <button class="nav-link btn btn-link" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></button>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                                        <li><a href="settings.php" class="dropdown-item">Settings</a></li>
+                                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                    </ul>
                                 </li>
                             <?php else: ?>
                                 <li class="nav-item">
