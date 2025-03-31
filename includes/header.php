@@ -1,7 +1,3 @@
-<?php
-include_once 'includes/session.php'; // Include session management file
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +7,14 @@ include_once 'includes/session.php'; // Include session management file
     <title>Attendance - <?php echo $title ?></title>
 
     <!-- BOOTSTRAP CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/main.css">
@@ -32,66 +35,18 @@ include_once 'includes/session.php'; // Include session management file
         </nav>
     <?php } else { ?>
         <header>
-            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
-                <div class="container">
-                    <a class="navbar-brand" href="index.php">IT Company</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="attendees.php">View Attendees</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="students.php">Students</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ms-auto">
-                            <?php if (isset($_SESSION['username'])): ?>
-                                <li class="nav-item dropdown">
-                                    <button class="nav-link btn btn-link" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></button>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                        <li><a href="settings.php" class="dropdown-item">Settings</a></li>
-                                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                                    </ul>
-                                </li>
-                            <?php else: ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="register.php">Register</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.php">Login</a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
-                </div>
+            <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" aria-label="Main navigation">
+                <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+                <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
+                    data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+                <ul class="navbar-nav px-3">
+                    <li class="nav-item text-nowrap">
+                        <a class="nav-link" href="#">Sign out</a>
+                    </li>
+                </ul>
             </nav>
         </header>
     <?php } ?>
-
-    <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-12">
-                <?php if (isset($_SESSION['message'])): ?>
-                    <div class="alert alert-success" role="alert">
-                        <?php
-                        echo $_SESSION['message'];
-                        unset($_SESSION['message']);
-                        ?>
-                    </div>
-                <?php endif; ?>
-
-                <?php if (isset($_SESSION['error'])): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php
-                        echo $_SESSION['error'];
-                        unset($_SESSION['error']);
-                        ?>
-                    </div>
-                <?php endif; ?>
