@@ -1,6 +1,6 @@
 <?php
 $title = 'Attendees';
-require_once '../db/db_conn.php';
+require_once 'db/db_conn.php';
 
 $results = $crud->getAttendees();
 ?>
