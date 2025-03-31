@@ -1,0 +1,25 @@
+RewriteEngine On
+
+# Redirect to HTTPS (if using SSL)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Exclude login and dashboard pages from being rewritten
+RewriteCond %{REQUEST_URI} !^/php-website/login.php$
+RewriteCond %{REQUEST_URI} !^/php-website/admin/dashboard.php$
+RewriteCond %{REQUEST_URI} !^/php-website/teacher/dashboard.php$
+RewriteCond %{REQUEST_URI} !^/php-website/student/dashboard.php$
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Disable Directory Browsing
+Options -Indexes
+
+# Enable Caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+</IfModule>
