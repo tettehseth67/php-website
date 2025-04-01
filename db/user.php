@@ -10,56 +10,64 @@ class User
         $this->db = $conn;
     }
 
-
     // Function to insert a new user into the database
-    public function insertUsers($username, $password)
+    public function insertUsers($username, $password, $role = 'student')
     {
         try {
-            $result = $this->getUserByUsername($username);
-            if ($result['num'] > 0) {
+            if ($this->userExists($username)) {
                 return "Username already exists.";
-            }else {
-                $new_password = password_hash($password, PASSWORD_BCRYPT); // Hash the password for security
-                $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(':username', $username);
-                $stmt->bindParam(':password', $new_password);
-                $stmt->execute();
-                return "User created successfully.";
             }
+
+            $new_password = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "INSERT INTO users (username, password, role) VALUES (:username, :password, :role)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $new_password);
+            $stmt->bindParam(':role', $role);
+
+            return $stmt->execute();
         } catch (PDOException $e) {
-            echo "Error: ". $e->getMessage();
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
+
+    // Function to fetch user and verify password
     public function getUsers($username, $password)
     {
         try {
-            $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+            $sql = "SELECT * FROM users WHERE username = :username";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $password);
             $stmt->execute();
-            $result = $stmt->fetch();
-            return $result;
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verify password if user exists
+            if ($user && password_verify($password, $user['password'])) {
+                return $user;
+            }
+
+            return false; // Authentication failed
         } catch (PDOException $e) {
-            echo "Error: ". $e->getMessage();
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }
 
-    public function getUserByUsername($username)
+    // Check if user exists
+    public function userExists($username)
     {
         try {
-            $sql = "SELECT count(*) as num FROM users WHERE username = :username";
+            $sql = "SELECT COUNT(*) as num FROM users WHERE username = :username";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
-            $result = $stmt->fetch();
-            return $result;
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['num'] > 0;
         } catch (PDOException $e) {
-            echo "Error: ". $e->getMessage();
+            echo "Error: " . $e->getMessage();
             return false;
         }
     }

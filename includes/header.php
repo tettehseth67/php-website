@@ -1,52 +1,48 @@
-<!DOCTYPE html>
+<?php
+//This includes the session file. This file contains code that starts/resumes a session. 
+//By having it in the header file, it will be included on every page, allowing session capability to be used on every page across the website.
+include_once __DIR__ . "/session.php";
+?>
+
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="css/site.css" />
+
     <title>Attendance - <?php echo $title ?></title>
-
-    <!-- BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/main.css">
-
-    <!-- JQUERY UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
-    <?php
-    $page = basename($_SERVER['PHP_SELF']);
-    if ($page == "register.php" || $page == "login.php" || $page == "submit_registration.php" || $page == "forgot_password.php" || $page == "login_success.php") {
-    ?>
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark" aria-label="Primary navigation">
-            <div class="container">
-                <a class="navbar-brand" href="index.php">IT Company</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.php">Attendance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="attendees.php">View Attendees</a>
             </div>
-        </nav>
-    <?php } else { ?>
-        <header>
-            <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" aria-label="Main navigation">
-                <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
-                <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
-                    data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-                <ul class="navbar-nav px-3">
-                    <li class="nav-item text-nowrap">
-                        <a class="nav-link" href="#">Sign out</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-    <?php } ?>
+            <div class="navbar-nav ml-auto">
+                <?php
+                if (!isset($_SESSION['userid'])) {
+                ?>
+                    <a class="nav-item nav-link" href="login.php">Login <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="register.php">Register <span class="sr-only">(current)</span></a>
+                <?php } else { ?>
+                    <a class="nav-item nav-link" href="#"><span>Hello <?php echo $_SESSION['username'] ?>! </span> <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="logout.php">Logout <span class="sr-only">(current)</span></a>
+                <?php } ?>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
