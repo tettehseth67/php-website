@@ -24,4 +24,4 @@ $crud = new Crud($conn);
 $user = new User($conn);
 $student = new Student($conn);
 
-$user->insertUsers("admin", "password");
+//$user->insertUsers("admin", "password");

@@ -10,6 +10,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "admin") {
     exit;
 }
 
+if (!$conn) {
+    die("Database connection failed.");
+}
+
 // Fetch all students
 $sql = "SELECT id, username FROM users WHERE role = 'student'";
 $stmt = $conn->prepare($sql);
