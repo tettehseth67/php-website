@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once "../db/db_conn.php";
-require_once "includes/header.php";
-require_once "includes/sidebar.php";
+//require_once "includes/header.php";
+
 
 // Ensure user is logged in as a student
 if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "student") {
@@ -25,6 +25,7 @@ $attendance_records = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
