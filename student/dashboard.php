@@ -1,16 +1,15 @@
 <?php
+session_start(); // Ensure session starts at the beginning
+
 require_once "../student/includes/header.php";
 require_once "../db/db_conn.php";
 
 // Ensure user is logged in as a student
 if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "student") {
-    header("location: ../login.php");
-    exit;
+    header("Location: ../login.php");
+    exit();
 }
-
 ?>
-
-
 
 <div class="container-fluid">
     <div class="row">
@@ -24,66 +23,21 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "student") {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file"></span>
-                            Orders
+                        <a class="nav-link" href="../student/view_attendance.php">
+                            <span data-feather="check-square"></span>
+                            Attendance
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            Products
+                        <a class="nav-link" href="../student/view_schedule.php">
+                            <span data-feather="calendar"></span>
+                            Schedule
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/manage_students.php">
-                            <span data-feather="users"></span>
-                            Manage Students
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            Reports
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            Integrations
-                        </a>
-                    </li>
-                </ul>
-
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Saved reports</span>
-                    <a class="link-secondary" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
+                        <a class="nav-link" href="../student/view_grades.php">
+                            <span data-feather="book"></span>
+                            Grades
                         </a>
                     </li>
                 </ul>
@@ -91,8 +45,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "student") {
         </nav>
 
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div
-                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Student Dashboard</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
@@ -128,20 +81,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "student") {
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card text-white bg-info mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Manage Users</h5>
-                                <p class="card-text">Add, edit, or delete user accounts.</p>
-                                <a href="../admin/manage_users.php" class="btn btn-light">Go to Users</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>
     </div>
 </div>
-
 
 <?php require_once "../student/includes/footer.php"; ?>

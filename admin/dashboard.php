@@ -142,7 +142,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "admin") {
                             <div class="card-body">
                                 <h5 class="card-title">Manage Attendees</h5>
                                 <p class="card-text">Add, update, or remove attendee accounts.</p>
-                                <a href="manage_attendees.php" class="btn btn-light">Go to Attendees</a>
+                                <a href="manage_attendance.php" class="btn btn-light">Go to Attendees</a>
                             </div>
                         </div>
                     </div>

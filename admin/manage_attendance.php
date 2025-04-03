@@ -2,7 +2,7 @@
 session_start();
 require_once "../db/db_conn.php";
 require_once "includes/header.php";
-require_once "includes/sidebar.php";
+
 
 // Check if the user is an admin
 if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "admin") {
@@ -11,8 +11,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "admin") {
 }
 
 // Fetch attendance records
-$sql = "SELECT a.id, s.username AS student_name, a.date, a.status 
-        FROM attendance a 
+$sql = "SELECT a.id, s.username AS student_name, a.date, a.status
+        FROM attendance a
         JOIN users s ON a.student_id = s.id";
 $stmt = $conn->prepare($sql);
 $stmt->execute();

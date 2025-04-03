@@ -2,18 +2,15 @@
 
 session_start();
 require_once "../db/db_conn.php";
-//require_once "includes/header.php";
+require_once "includes/header.php";
 
 // Check if the user is an admin
-echo "Checkpoint 1: Script is running.";
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["role"] !== "admin") {
     echo "Redirecting to login...";
     header("location: ../login.php");
     exit;
 }
-
-echo "Checkpoint 2: User authenticated.";
 
 // Fetch users
 $sql = "SELECT id, username, role FROM users";

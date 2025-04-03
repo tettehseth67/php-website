@@ -1,4 +1,6 @@
-<?php // Start the session
+<?php
+ // Ensure session starts at the beginning
+$title = 'Login';
 require_once 'includes/header.php';
 require_once "db/db_conn.php";
 
@@ -29,25 +31,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user["password"])) {
-            // Store session variables
-            $_SESSION["loggedin"] = true;
-            $_SESSION["id"] = $user["id"];
-            $_SESSION["username"] = $user["username"];
-            $_SESSION["role"] = $user["role"];
+        if ($user) {
+            // Verify password
+            if (password_verify($password, $user["password"])) {
+                // Regenerate session ID for security
+                session_regenerate_id(true);
 
-            if ($user["role"] === "admin") {
-                header("location: /php-website/admin/dashboard.php");
-                exit();
-            } elseif ($user["role"] === "teacher") {
-                header("location: /php-website/teacher/dashboard.php");
-                exit();
-            } elseif ($user["role"] === "student") {
-                header("location: /php-website/student/dashboard.php");
+                // Store session variables
+                $_SESSION["loggedin"] = true;
+                $_SESSION["id"] = $user["id"];
+                $_SESSION["username"] = $user["username"];
+                $_SESSION["role"] = $user["role"];
+
+                // Debugging output (remove after testing)
+                echo "<pre>SESSION DATA:\n";
+                print_r($_SESSION);
+                echo "</pre>";
+
+                // Redirect based on role
+                switch ($user["role"]) {
+                    case "admin":
+                        header("Location: /php-website/admin/dashboard.php");
+                        break;
+                    case "teacher":
+                        header("Location: /php-website/teacher/dashboard.php");
+                        break;
+                    case "student":
+                        header("Location: /php-website/student/dashboard.php");
+                        break;
+                    default:
+                        echo "Unknown role detected. Please check your database.";
+                        exit();
+                }
                 exit();
             } else {
-                echo "Unknown role detected. Please check your database.";
-                exit();
+                $login_err = "Invalid username or password!";
             }
         } else {
             $login_err = "Invalid username or password!";
