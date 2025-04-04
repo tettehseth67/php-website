@@ -61,25 +61,27 @@ $teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="container mt-4">
 
                 <a href="add_teacher.php" class="btn btn-success mb-3">Add Teacher</a>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Teacher Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($teachers as $teacher): ?>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                <td><?php echo htmlspecialchars($teacher['username']); ?></td>
-                                <td>
-                                    <a href="edit_teacher.php?id=<?php echo $teacher['id']; ?>" class="btn btn-info">Edit</a>
-                                    <a href="delete_teacher.php?id=<?php echo $teacher['id']; ?>" class="btn btn-danger">Delete</a>
-                                </td>
+                                <th>Teacher Name</th>
+                                <th>Actions</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($teachers as $teacher): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($teacher['username']); ?></td>
+                                    <td>
+                                        <a href="edit_teacher.php?id=<?php echo $teacher['id']; ?>" class="btn btn-info">Edit</a>
+                                        <a href="delete_teacher.php?id=<?php echo $teacher['id']; ?>" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>

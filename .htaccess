@@ -14,6 +14,11 @@ RewriteRule ^ student/dashboard.php [L,QSA]
 RewriteCond %{REQUEST_URI} ^/php-website/teacher/$ [NC]
 RewriteRule ^ teacher/dashboard.php [L,QSA]
 
+# Redirect to respective subdomains based on the user role stored in session
+RewriteCond %{HTTP_HOST} ^(student|teacher|admin)\.yourdomain\.com$ [NC]
+RewriteCond %{REQUEST_URI} ^/php-website/$
+RewriteRule ^$ /php-website/%1/dashboard.php [L,QSA]
+
 # Exclude login/logout/register pages from being rewritten
 RewriteCond %{REQUEST_URI} !^/php-website/login.php$
 RewriteCond %{REQUEST_URI} !^/php-website/logout.php$
