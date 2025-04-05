@@ -4,28 +4,25 @@ RewriteEngine On
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Redirect only if accessing base admin/student/teacher URLs (not subpages)
-RewriteCond %{REQUEST_URI} ^/php-website/admin/$ [NC]
-RewriteRule ^ admin/dashboard.php [L,QSA]
+# Handle subdomain-based redirection
+RewriteCond %{HTTP_HOST} ^student\.yourdomain\.com$ [NC]
+RewriteRule ^$ /php-website/student/dashboard.php [L,QSA]
 
-RewriteCond %{REQUEST_URI} ^/php-website/student/$ [NC]
-RewriteRule ^ student/dashboard.php [L,QSA]
+RewriteCond %{HTTP_HOST} ^admin\.yourdomain\.com$ [NC]
+RewriteRule ^$ /php-website/admin/dashboard.php [L,QSA]
 
-RewriteCond %{REQUEST_URI} ^/php-website/teacher/$ [NC]
-RewriteRule ^ teacher/dashboard.php [L,QSA]
-
-# Redirect to respective subdomains based on the user role stored in session
-RewriteCond %{HTTP_HOST} ^(student|teacher|admin)\.yourdomain\.com$ [NC]
-RewriteCond %{REQUEST_URI} ^/php-website/$
-RewriteRule ^$ /php-website/%1/dashboard.php [L,QSA]
+RewriteCond %{HTTP_HOST} ^teacher\.yourdomain\.com$ [NC]
+RewriteRule ^$ /php-website/teacher/dashboard.php [L,QSA]
 
 # Exclude login/logout/register pages from being rewritten
 RewriteCond %{REQUEST_URI} !^/php-website/login.php$
 RewriteCond %{REQUEST_URI} !^/php-website/logout.php$
 RewriteCond %{REQUEST_URI} !^/php-website/register.php$
-RewriteCond %{REQUEST_URI} !^/php-website/admin/.*$ [NC]  # Allow admin subpages
-RewriteCond %{REQUEST_URI} !^/php-website/student/.*$ [NC] # Allow student subpages
-RewriteCond %{REQUEST_URI} !^/php-website/teacher/.*$ [NC] # Allow teacher subpages
+
+# Allow admin, student, and teacher subpages
+RewriteCond %{REQUEST_URI} !^/php-website/admin/.*$ [NC]
+RewriteCond %{REQUEST_URI} !^/php-website/student/.*$ [NC]
+RewriteCond %{REQUEST_URI} !^/php-website/teacher/.*$ [NC]
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
 # Disable Directory Browsing
